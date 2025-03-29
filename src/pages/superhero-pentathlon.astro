@@ -1,0 +1,9 @@
+---
+import LandingView from '@components/views/LandingView.vue';
+import MainLayout from '@layouts/MainLayout.astro';
+import "../styles/global.css";
+---
+
+<MainLayout metaTitle="Superhero Pentathlon">
+  <LandingView client:load />
+</MainLayout>
