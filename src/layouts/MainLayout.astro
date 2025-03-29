@@ -1,10 +1,12 @@
 ---
 import '@fontsource/lato';
 import '@fontsource/lato/900.css';
+import "../styles/global.css";
 
 interface Props {
   metaTitle?: string;
 }
+
 const { metaTitle = 'Superheroes in tha house' } = Astro.props;
 ---
 
@@ -12,11 +14,12 @@ const { metaTitle = 'Superheroes in tha house' } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="src/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="src/styles/global.css" />
 
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{metaTitle} | Superheroes Competetition</title>
+    <title>{metaTitle} | Superheroes Competition</title>
   </head>
   <body>
     <div class="main-layout-container">
@@ -24,23 +27,3 @@ const { metaTitle = 'Superheroes in tha house' } = Astro.props;
     </div>
   </body>
 </html>
-
-<style>
-  :root {
-    font-family: 'Lato';
-  }
-
-  html,
-  body,
-  .main-layout-container {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    background-color: white;
-  }
-
-  html {
-    overflow: auto;
-    height: 100%;
-  }
-</style>

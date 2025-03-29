@@ -16,9 +16,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col items-center justify-center comic-background">
-    <SuperheroWelcome />
-  </div>
+  <div class="w-full h-full flex flex-col items-center justify-center comic-background">lalala</div>
 </template>
 
 <style scoped>

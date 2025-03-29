@@ -1,1 +1,15 @@
 @import 'tailwindcss';
+
+:root {
+  font-family: 'Lato';
+}
+
+html,
+body,
+.main-layout-container {
+  @apply w-full h-full m-0 bg-white;
+}
+
+html {
+  @apply h-full overflow-auto;
+}

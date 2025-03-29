@@ -9,7 +9,8 @@
       "@components/*": ["src/components/*"],
       "@stores/*": ["src/stores/*"],
       "@domain/*": ["src/domain/*"],
-      "@tests/*": ["tests/*"]
+      "@tests/*": ["tests/*"],
+      "@models/*": ["src/types/*"]
     },
     "esModuleInterop": true
   },
