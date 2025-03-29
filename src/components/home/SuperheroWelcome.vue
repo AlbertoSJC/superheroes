@@ -5,7 +5,7 @@
     <img src="/src/images/superhero-group.png" alt="Superhero group" />
     <div class="flex flex-col items-center justify-center gap-2">
       <h1 class="text-4xl font-bold superhero-fonting text-shadow">Welcome to the Superhero Pentathlon!</h1>
-      <p class="text-lg text-black superhero-fonting small-text-shadow">Discover who Superhero would win in a totally fair and not rigged competition!</p>
+      <p class="text-lg text-black superhero-fonting small-text-shadow">Discover which Superhero would win in a totally fair and not rigged competition!</p>
       <a href="/superhero-pentathlon" class="mt-4">
         <button
           class="bg-black font-bold py-2 px-4 rounded transition duration-300 ease-in-out cursor-pointer hover:bg-[#fff66f] hover:!text-black hover:drop-shadow-none superhero-fonting small-text-shadow"
