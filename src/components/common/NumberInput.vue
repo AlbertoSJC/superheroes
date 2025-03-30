@@ -28,7 +28,7 @@ watch(modelValue, (newValue) => {
   <div class="flex flex-row gap-4 items-center" :class="{ 'justify-between': spaceBetween }">
     <label v-if="label" :for="id" class="font-semibold" :id="`${id}-label`">{{ label }}</label>
     <input
-      class="my-2.5 border-[2.5px] border-black p-1.25 rounded-[10px] max-w-[50px] text-center focus:border-[#fff66f] focus:outline-0 active:border-[#fff66f] active:outline-0 focus-visible:border-[#fff66f] focus-visible:outline-0"
+      class="my-2.5 border-[2.5px] font-bold border-black p-1.25 rounded-[10px] max-w-[50px] text-center focus:border-[#fff66f] focus:outline-0 active:border-[#fff66f] active:outline-0 focus-visible:border-[#fff66f] focus-visible:outline-0"
       v-model="modelValue"
       :class="classes"
       type="number"
