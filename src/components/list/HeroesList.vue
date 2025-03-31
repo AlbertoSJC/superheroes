@@ -4,6 +4,7 @@ import { SuperheroesList } from '@domain/SuperheroesList';
 import { useSuperheroesStore } from '@stores/superheroes';
 import apiService from 'src/services/apiService';
 import { computed, onMounted, ref } from 'vue';
+import HeroCard from './HeroCard.vue';
 
 const superheroesStore = useSuperheroesStore();
 
@@ -27,17 +28,10 @@ onMounted(async () => {
 <template>
   <div class="flex flex-wrap gap-2.5 w-[530px] h-[700px] overflow-auto scroll-container">
     <template v-if="loading">
-      <div class="w-full h-full flex flex-nowrap flex-col items-center justify-center gap-6">
-        <Loader />
-        <span class="text-lg font-semibold text-center">Loading heroes</span>
-      </div>
+      <Loader />
     </template>
     <template v-else-if="allSuperheroes && allSuperheroes.length > 0">
-      <div v-for="hero in allSuperheroes" :key="hero.id" class="flex flex-col items-center bg-black border-2 border-[#fff66f] shadow-md rounded-lg p-4 min-w-[160px] max-w-[160px]">
-        <img v-if="hero.picture" :src="hero.picture" :alt="`${hero.name}-image`" class="w-32 h-32 object-cover rounded-full mb-4 bg-[#fff66f] border-2 border-[#fff66f]" />
-        <img v-else src="/src/images/default-hero.png" :alt="`${hero.name}-image`" class="w-32 h-32 object-cover rounded-full mb-4 bg-[#fff66f] border-2 border-[#fff66f]" />
-        <p class="text-lg font-semibold text-center text-[#fff66f] ellipsis-text" :title="hero.name">{{ hero.name }}</p>
-      </div>
+      <HeroCard v-for="singleHero in allSuperheroes" :hero="singleHero" />
     </template>
     <template v-else>
       <span class="text-lg font-semibold text-center">Oopsie, this looks empty, add your first Superhero!</span>

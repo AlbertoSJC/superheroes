@@ -1,7 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="lds-hourglass"></div>
+  <div class="w-full h-full flex flex-nowrap flex-col items-center justify-center gap-6">
+    <div class="lds-hourglass"></div>
+    <span class="text-lg font-semibold text-center">Loading heroes</span>
+  </div>
 </template>
 
 <style scoped>
