@@ -16,7 +16,6 @@ onMounted(async () => {
     .fetchSuperHeroesList()
     .then((response) => {
       superheroesStore.list = new SuperheroesList(response);
-      console.log(superheroesStore.list);
       loading.value = false;
     })
     .catch(() => {
@@ -26,7 +25,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-wrap gap-2.5 w-[530px] h-[700px] overflow-auto scroll-container">
+  <div class="flex flex-wrap gap-2.5 w-[530px] max-h-[700px] overflow-auto scroll-container">
     <template v-if="loading">
       <Loader />
     </template>

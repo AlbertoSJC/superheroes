@@ -9,6 +9,15 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
   const heroToUpload = ref<Superhero>(new Superhero({}));
   const imageFromHeroToUpload = ref<string | null>(null);
   const imageUploadingError = ref<string | null>(null);
+  const heroToBeforeEdit = ref<Superhero | null>(null);
+
+  const cancelEdit = () => {
+    if (heroToBeforeEdit.value) {
+      list.value.updateSuperhero(heroToBeforeEdit.value);
+    }
+    heroToUpload.value = new Superhero({});
+    heroToBeforeEdit.value = null;
+  };
 
   return {
     list,
@@ -16,5 +25,7 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
     heroToUpload,
     imageFromHeroToUpload,
     imageUploadingError,
+    heroToBeforeEdit,
+    cancelEdit,
   };
 });

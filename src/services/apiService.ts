@@ -22,7 +22,7 @@ const apiService = {
       });
       return response.data;
     } catch (error) {
-      console.error('Error fetching API key details:', error);
+      console.error('Error fetching Superheroes list:', error);
       throw error;
     }
   },
@@ -34,7 +34,31 @@ const apiService = {
       });
       return response.data;
     } catch (error) {
-      console.error('Error fetching API key details:', (error as any).response.data.message);
+      console.error('Error posting superhero:', (error as any).response.data.message);
+      throw error;
+    }
+  },
+
+  async updateSuperhero(hero: Superhero): Promise<SuperheroInformation> {
+    try {
+      const response = await axios.put(`${ENV_VARIABLE.PUBLIC_BASE_API_URL}/pentathlon/heroes/${hero.id}`, hero, {
+        headers: { Authorization: ENV_VARIABLE.PUBLIC_SUPERHERO_API_KEY, 'Content-Type': 'application/json' },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error posting superhero:', (error as any).response.data.message);
+      throw error;
+    }
+  },
+
+  async deleteSuperhero(hero: Superhero): Promise<void> {
+    try {
+      const response = await axios.delete(`${ENV_VARIABLE.PUBLIC_BASE_API_URL}/pentathlon/heroes/${hero.id}`, {
+        headers: { Authorization: ENV_VARIABLE.PUBLIC_SUPERHERO_API_KEY },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error removing hero:', (error as any).response.data.message);
       throw error;
     }
   },

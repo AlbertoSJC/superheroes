@@ -1,20 +1,46 @@
 <script setup lang="ts">
-import type { Superhero } from '@domain/Superhero';
+import { Superhero } from '@domain/Superhero';
+import { useSuperheroesStore } from '@stores/superheroes';
+import apiService from 'src/services/apiService';
 
 interface PropsModel {
   hero: Superhero;
   canbeSelected?: boolean;
 }
-defineProps<PropsModel>();
+
+const { hero } = defineProps<PropsModel>();
+
+const superheroesStore = useSuperheroesStore();
+
+const selectHeroToUpdate = async () => {
+  const heroToUpdate = superheroesStore.list.getSuperheroById(hero.id as string);
+  if (heroToUpdate) {
+    if (heroToUpdate.id !== superheroesStore.heroToUpload.id) {
+      await superheroesStore.cancelEdit();
+    }
+    superheroesStore.heroToBeforeEdit = new Superhero(heroToUpdate);
+    superheroesStore.heroToUpload = heroToUpdate;
+  }
+};
+
+const removeHero = async () => {
+  await apiService
+    .deleteSuperhero(hero)
+    .then(() => {
+      superheroesStore.list.removeSuperhero(hero);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 </script>
 
 <template>
   <div :key="hero.id" class="relative flex flex-col items-center bg-black border-2 border-[#fff66f] shadow-md rounded-lg p-4 min-w-[160px] max-w-[160px]">
     <template v-if="!canbeSelected">
-      <span class="absolute font-bold text-red-600 top-0 right-2 cursor-pointer delete-hero">x</span>
-      <img class="absolute font-bold h-[15px] top-2 left-2 cursor-pointer" src="/src/images/edit-icon.png" />
+      <span class="absolute font-bold text-red-600 top-0 right-2 cursor-pointer delete-hero" @click="removeHero">x</span>
+      <img class="absolute font-bold h-[15px] top-2 left-2 cursor-pointer" src="/src/images/edit-icon.png" @click="selectHeroToUpdate" />
     </template>
-
     <img v-if="hero.picture" :src="hero.picture" :alt="`${hero.name}-image`" class="w-32 h-32 object-cover rounded-full mb-4 bg-[#fff66f] border-2 border-[#fff66f]" />
     <img v-else src="/src/images/default-hero.png" :alt="`${hero.name}-image`" class="w-32 h-32 object-cover rounded-full mb-4 bg-[#fff66f] border-2 border-[#fff66f]" />
     <p class="text-lg font-semibold text-center text-[#fff66f] ellipsis-text" :title="hero.name">{{ hero.name }}</p>

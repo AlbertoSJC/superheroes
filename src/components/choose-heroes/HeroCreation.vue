@@ -12,6 +12,18 @@ const superheroesStore = useSuperheroesStore();
 
 const errorMessage = ref<string | null>(null);
 
+const updateHero = async () => {
+  await apiService
+    .updateSuperhero(superheroesStore.heroToUpload)
+    .then(() => {
+      superheroesStore.heroToBeforeEdit = null;
+      superheroesStore.heroToUpload = new Superhero({});
+    })
+    .catch((error) => {
+      errorMessage.value = (error as any).response.data.message;
+    });
+};
+
 const createHero = async () => {
   await apiService
     .postSuperhero(superheroesStore.heroToUpload)
@@ -22,6 +34,14 @@ const createHero = async () => {
     .catch((error) => {
       errorMessage.value = (error as any).response.data.message;
     });
+};
+
+const handleHero = () => {
+  if (superheroesStore.heroToBeforeEdit) {
+    updateHero();
+  } else {
+    createHero();
+  }
 };
 </script>
 
@@ -44,7 +64,10 @@ const createHero = async () => {
     </div>
     <div class="flex flex-col justify-center items-center gap-4">
       <span class="text-red-950 font-bold text-center" v-if="errorMessage">{{ errorMessage }}</span>
-      <ButtonElement @click="createHero" text="Save you Hero!" :disabled="!superheroesStore.heroToUpload.name" />
+      <div class="flex flex-row justify-center items-center gap-4">
+        <ButtonElement v-if="superheroesStore.heroToBeforeEdit" @click="superheroesStore.cancelEdit" text="Start New Hero" classes="!bg-black !text-white hover:!bg-white hover:!text-black" />
+        <ButtonElement @click="handleHero" :text="!superheroesStore.heroToBeforeEdit ? `Save you Hero!` : `Edit your hero!`" :disabled="!superheroesStore.heroToUpload.name" />
+      </div>
     </div>
   </div>
 </template>
