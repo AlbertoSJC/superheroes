@@ -27,6 +27,9 @@ const removeHero = async () => {
   await apiService
     .deleteSuperhero(hero)
     .then(() => {
+      if (superheroesStore.heroToUpload && hero.id === superheroesStore.heroToUpload.id) {
+        superheroesStore.cancelEdit();
+      }
       superheroesStore.list.removeSuperhero(hero);
     })
     .catch((error) => {
