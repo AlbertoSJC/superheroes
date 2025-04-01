@@ -8,4 +8,6 @@ npm 10.9.2
 
 command to start the application:
 
+npm i
+
 npm start
