@@ -10,9 +10,10 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
   const heroToUpload = ref<Superhero>(new Superhero({}));
   const heroToBeforeEdit = ref<Superhero | null>(null);
   const pentathlonList = ref<PentathlonList>(new PentathlonList());
-  const pentathlonWinnersList = ref<PentathlonList>(new PentathlonList());
-  const pentathlonLosersList = ref<PentathlonList>(new PentathlonList());
+  const pentathlonWinnersList = ref<PentathlonList | null>(null);
+  const pentathlonLosersList = ref<PentathlonList | null>(null);
   const errorMessage = ref<string | null>(null);
+  const pentathlonLoading = ref<boolean>(false);
 
   const cancelEdit = () => {
     if (heroToBeforeEdit.value) {
@@ -24,6 +25,7 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
 
   const selectPentathlonSuperhero = (hero: Superhero) => {
     list.value.toggleSuperheroSelect(hero);
+    pentathlonWinnersList.value = null;
 
     if (hero.selected) {
       pentathlonList.value.addSuperhero(hero);
@@ -90,8 +92,22 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
   };
 
   const pentathlonRunning = () => {
+    pentathlonLoading.value = true;
+
     const pentathlonRunningList = new PentathlonList(pentathlonList.value.superheroes);
+
     pentathlonRunningList.skyscraperClimbing();
+    pentathlonRunningList.jokeTelling();
+    pentathlonRunningList.villainShooting();
+    pentathlonRunningList.twoHundredKm();
+    pentathlonRunningList.hundredKittenRescue();
+
+    const winners = pentathlonRunningList.superheroes.splice(0, 3);
+
+    pentathlonWinnersList.value = new PentathlonList(winners);
+    pentathlonLosersList.value = pentathlonRunningList.superheroes.length > 0 ? new PentathlonList(pentathlonRunningList.superheroes) : null;
+
+    pentathlonLoading.value = false;
   };
 
   return {
@@ -102,6 +118,7 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
     pentathlonWinnersList,
     pentathlonLosersList,
     errorMessage,
+    pentathlonLoading,
     cancelEdit,
     selectPentathlonSuperhero,
     selectHeroToUpdate,

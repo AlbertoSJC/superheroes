@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { PentathlonSuperhero } from '@domain/PentathlonSuperhero';
 import { Superhero } from '@domain/Superhero';
 import { useSuperheroesStore } from '@stores/superheroes';
 
 interface PropsModel {
-  hero: Superhero;
+  hero: Superhero | PentathlonSuperhero;
   canBeEdited?: boolean;
   canBeSelected?: boolean;
 }

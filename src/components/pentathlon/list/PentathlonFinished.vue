@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import Loader from '@components/common/Loader.vue';
 import { useSuperheroesStore } from '@stores/superheroes';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import PentathlonSuperheroCard from '../PentathlonSuperheroCard.vue';
-import WinnersAndLosersList from './WinnersAndLosersList.vue';
 
 const superheroesStore = useSuperheroesStore();
 
@@ -16,7 +15,7 @@ const allSuperheroes = computed(() => superheroesStore.pentathlonList?.superhero
       <Loader text="Heroes are COMPETING!" />
     </template>
     <template v-else-if="superheroesStore.pentathlonWinnersList">
-      <WinnersAndLosersList />
+      <PentathlonSuperheroCard v-for="singleHero in allSuperheroes" :chosen-hero="singleHero" />
     </template>
     <template v-else-if="allSuperheroes && allSuperheroes.length > 0">
       <PentathlonSuperheroCard v-for="singleHero in allSuperheroes" :chosen-hero="singleHero" />

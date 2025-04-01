@@ -5,7 +5,6 @@ export class PentathlonList {
   superheroes: PentathlonSuperhero[];
 
   constructor(data?: PentathlonSuperheroInformation[]) {
-    console.log('I dont understand data', data);
     this.superheroes = data ? data.map((item) => new PentathlonSuperhero(item)) : [];
   }
 
@@ -36,23 +35,51 @@ export class PentathlonList {
     });
   }
 
-  resetHeroesPoints() {
-    this.superheroes.forEach((hero, index) => {
-      hero.currentTrialOutput = 0;
-      hero.totalPoints = 0;
-      hero.lastTrialPoints = 0;
-      hero.numberOfTrialsWon = 0;
-    });
-  }
-
   skyscraperClimbing() {
-    this.superheroes.forEach((hero, index) => {
+    this.superheroes.forEach((hero) => {
       hero.resetHeroPoints();
       hero.calculateSkyscraperClimbing();
     });
 
     this.reorderCompetitorsOfTrial();
     this.assignPoints();
-    console.log('Hello', this.superheroes);
+  }
+
+  jokeTelling() {
+    const totalCharisma = this.superheroes.reduce((sum, superhero) => sum + superhero.attributes.charisma, 0);
+    this.superheroes.forEach((hero) => {
+      hero.calculateJokeTelling(totalCharisma - hero.attributes.charisma);
+    });
+
+    this.reorderCompetitorsOfTrial();
+    this.assignPoints();
+  }
+
+  villainShooting() {
+    const lastIndex = this.superheroes.length - 1;
+    this.superheroes.forEach((hero, index) => {
+      hero.calculateShotTheVillain(index === lastIndex);
+    });
+
+    this.reorderCompetitorsOfTrial();
+    this.assignPoints();
+  }
+
+  twoHundredKm() {
+    this.superheroes.forEach((hero) => {
+      hero.calculateTwoHundredKm();
+    });
+
+    this.reorderCompetitorsOfTrial();
+    this.assignPoints();
+  }
+
+  hundredKittenRescue() {
+    this.superheroes.forEach((hero) => {
+      hero.calculateHundredKittenRescue();
+    });
+
+    this.reorderCompetitorsOfTrial();
+    this.assignPoints();
   }
 }
