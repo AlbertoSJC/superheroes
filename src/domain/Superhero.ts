@@ -8,6 +8,7 @@ export class Superhero implements SuperheroInformation {
   name?: string;
   picture?: string;
   attributes: SuperheroAttributes;
+  selected?: boolean;
 
   constructor(data: SuperheroInformation) {
     this.id = data.id;
@@ -16,5 +17,6 @@ export class Superhero implements SuperheroInformation {
     this.name = data.name ?? '';
     this.picture = data.picture ?? '';
     this.attributes = new SuperheroAttributes(data.attributes);
+    this.selected = data.selected;
   }
 }

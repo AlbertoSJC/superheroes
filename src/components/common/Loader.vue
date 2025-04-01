@@ -1,9 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface PropsModel {
+  text?: string;
+}
+
+const { text = 'Loading' } = defineProps<PropsModel>();
+</script>
 
 <template>
   <div class="w-full h-full flex flex-nowrap flex-col items-center justify-center gap-6">
     <div class="lds-hourglass"></div>
-    <span class="text-lg font-semibold text-center">Loading heroes</span>
+    <span class="text-lg font-semibold text-center">{{ text }}</span>
   </div>
 </template>
 

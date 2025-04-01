@@ -2,7 +2,7 @@ import { type SuperheroInformation } from '@models/typesFile';
 import { Superhero } from './Superhero';
 
 export class SuperheroesList {
-  superheroes?: Superhero[];
+  superheroes: Superhero[];
 
   constructor(data?: SuperheroInformation[]) {
     this.superheroes = data ? data.map((item) => new Superhero(item)) : [];
@@ -16,15 +16,18 @@ export class SuperheroesList {
     return this.superheroes?.findIndex((listHero) => listHero.id === superhero.id) ?? -1;
   }
 
-  addSuperhero(superhero: Superhero) {
-    this.superheroes?.push(superhero);
+  toggleSuperheroSelect(superhero: Superhero) {
+    const index = this.getSuperheroIndex(superhero);
+    if (!isNaN(index)) this.superheroes[index].selected = !this.superheroes[index].selected;
+  }
+
+  addSuperhero(superhero: SuperheroInformation) {
+    this.superheroes?.push(new Superhero(superhero));
   }
 
   updateSuperhero(superhero: Superhero) {
     const index = this.getSuperheroIndex(superhero);
-    if (!isNaN(index) && this.superheroes) {
-      this.superheroes[index] = superhero;
-    }
+    if (!isNaN(index)) this.superheroes[index] = superhero;
   }
 
   removeSuperhero(superhero: Superhero) {

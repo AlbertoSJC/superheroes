@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useSuperheroesStore } from '@stores/superheroes';
 import { resizeImage } from 'src/utils/images';
+import { ref } from 'vue';
 
 const superheroesStore = useSuperheroesStore();
 
+let imageUploadingError = ref<string | null>(null);
+
 const handleImageErrors = (error: string) => {
-  superheroesStore.imageUploadingError = error;
+  imageUploadingError.value = error;
 };
 
 const handleImageUpload = async (event: Event) => {
@@ -24,7 +27,7 @@ const handleImageUpload = async (event: Event) => {
   try {
     const resizedBase64 = await resizeImage(file, 128, 128);
     superheroesStore.heroToUpload.picture = resizedBase64;
-    superheroesStore.imageUploadingError = null;
+    imageUploadingError.value = null;
   } catch (error) {
     handleImageErrors('Failed to process the image.');
   }
@@ -45,7 +48,7 @@ const handleImageUpload = async (event: Event) => {
       <input id="file-input" type="file" accept="image/*" @change="handleImageUpload" class="hidden" />
     </div>
 
-    <p v-if="superheroesStore.imageUploadingError" class="text-red-500">{{ superheroesStore.imageUploadingError }}</p>
+    <p v-if="imageUploadingError" class="text-red-500">{{ imageUploadingError }}</p>
   </div>
 </template>
 

@@ -19,6 +19,7 @@ export interface SuperheroInformation {
   name?: string;
   picture?: string;
   attributes?: SuperheroAttributesInformation;
+  selected?: boolean;
 }
 
 export interface InputProps {

@@ -6,6 +6,13 @@ import apiService from 'src/services/apiService';
 import { computed, onMounted, ref } from 'vue';
 import HeroCard from './HeroCard.vue';
 
+interface PropsModel {
+  canBeEdited?: boolean;
+  canBeSelected?: boolean;
+}
+
+defineProps<PropsModel>();
+
 const superheroesStore = useSuperheroesStore();
 
 const allSuperheroes = computed(() => superheroesStore.list?.superheroes);
@@ -25,12 +32,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-wrap gap-2.5 w-[530px] max-h-[700px] overflow-auto scroll-container">
+  <div class="flex flex-wrap items-center justify-center gap-2.5 w-[530px] max-h-[700px] overflow-auto scroll-container">
     <template v-if="loading">
-      <Loader />
+      <Loader text="Searching for heroes" />
     </template>
     <template v-else-if="allSuperheroes && allSuperheroes.length > 0">
-      <HeroCard v-for="singleHero in allSuperheroes" :hero="singleHero" />
+      <HeroCard v-for="singleHero in allSuperheroes" :hero="singleHero" :can-be-edited="canBeEdited" :can-be-selected="canBeSelected" />
     </template>
     <template v-else>
       <span class="text-lg font-semibold text-center">Oopsie, this looks empty, add your first Superhero!</span>
