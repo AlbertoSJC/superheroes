@@ -12,8 +12,8 @@ export class SuperheroesList {
     return this.superheroes?.find((superhero) => superhero.id === id);
   }
 
-  getSuperheroIndex(superhero: Superhero) {
-    return this.superheroes?.findIndex((listHero) => listHero.id === superhero.id);
+  getSuperheroIndex(superhero: Superhero): number {
+    return this.superheroes?.findIndex((listHero) => listHero.id === superhero.id) ?? -1;
   }
 
   addSuperhero(superhero: Superhero) {
@@ -22,13 +22,13 @@ export class SuperheroesList {
 
   updateSuperhero(superhero: Superhero) {
     const index = this.getSuperheroIndex(superhero);
-    if (index && this.superheroes) {
+    if (!isNaN(index) && this.superheroes) {
       this.superheroes[index] = superhero;
     }
   }
 
   removeSuperhero(superhero: Superhero) {
     const index = this.getSuperheroIndex(superhero);
-    if (index) this.superheroes?.splice(index, 1);
+    if (!isNaN(index)) this.superheroes?.splice(index, 1);
   }
 }

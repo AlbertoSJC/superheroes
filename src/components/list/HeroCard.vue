@@ -2,6 +2,7 @@
 import { Superhero } from '@domain/Superhero';
 import { useSuperheroesStore } from '@stores/superheroes';
 import apiService from 'src/services/apiService';
+import { computed } from 'vue';
 
 interface PropsModel {
   hero: Superhero;
@@ -39,7 +40,11 @@ const removeHero = async () => {
 </script>
 
 <template>
-  <div :key="hero.id" class="relative flex flex-col items-center bg-black border-2 border-[#fff66f] shadow-md rounded-lg p-4 min-w-[160px] max-w-[160px]">
+  <div
+    :key="hero.id"
+    class="relative flex flex-col items-center bg-black border-2 border-[#fff66f] shadow-md rounded-lg p-4 min-w-[160px] max-w-[160px]"
+    :class="{ '!bg-[#5058df]': hero.id === superheroesStore.heroToUpload.id }"
+  >
     <template v-if="!canbeSelected">
       <span class="absolute font-bold text-red-600 top-0 right-2 cursor-pointer delete-hero" @click="removeHero">x</span>
       <img class="absolute font-bold h-[15px] top-2 left-2 cursor-pointer" src="/src/images/edit-icon.png" @click="selectHeroToUpdate" />
