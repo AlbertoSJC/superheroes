@@ -26,6 +26,10 @@ export class PentathlonList {
     this.superheroes.sort((a, b) => b.currentTrialOutput - a.currentTrialOutput);
   }
 
+  reorderByTotalPoints() {
+    this.superheroes.sort((a, b) => b.totalPoints - a.totalPoints);
+  }
+
   assignPoints() {
     this.superheroes.forEach((hero, index) => {
       const pointsToAdd = index === 0 ? 5 : index === 1 ? 3 : index === 2 ? 2 : 1;
@@ -89,5 +93,6 @@ export class PentathlonList {
     this.villainShooting();
     this.twoHundredKm();
     this.hundredKittenRescue();
+    this.reorderByTotalPoints();
   }
 }
