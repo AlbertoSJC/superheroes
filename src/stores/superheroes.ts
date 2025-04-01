@@ -10,6 +10,7 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
   const heroToUpload = ref<Superhero>(new Superhero({}));
   const heroToBeforeEdit = ref<Superhero | null>(null);
   const pentathlonList = ref<PentathlonList>(new PentathlonList());
+  const errorMessage = ref<string | null>(null);
 
   const cancelEdit = () => {
     if (heroToBeforeEdit.value) {
@@ -54,14 +55,48 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
       });
   };
 
+  const updateHero = async () => {
+    await apiService
+      .updateSuperhero(heroToUpload.value)
+      .then(() => {
+        heroToBeforeEdit.value = null;
+        heroToUpload.value = new Superhero({});
+      })
+      .catch((error) => {
+        errorMessage.value = (error as any).response.data.message;
+      });
+  };
+
+  const createHero = async () => {
+    await apiService
+      .postSuperhero(heroToUpload.value)
+      .then((response) => {
+        list.value.addSuperhero(new Superhero(response));
+        heroToUpload.value = new Superhero({});
+      })
+      .catch((error) => {
+        errorMessage.value = (error as any).response.data.message;
+      });
+  };
+
+  const createOrUpdateHero = () => {
+    if (heroToBeforeEdit.value) {
+      updateHero();
+    } else {
+      createHero();
+    }
+  };
+
   return {
     list,
     heroToUpload,
     heroToBeforeEdit,
     pentathlonList,
+    errorMessage,
     cancelEdit,
     selectPentathlonSuperhero,
     selectHeroToUpdate,
     removeHero,
+    createOrUpdateHero,
   };
 });
