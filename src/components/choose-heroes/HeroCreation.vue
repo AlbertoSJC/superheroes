@@ -1,15 +1,18 @@
 <script setup lang="ts">
 import ButtonElement from '@components/common/ButtonElement.vue';
+import LinkElement from '@components/common/LinkElement.vue';
 import NumberInput from '@components/common/NumberInput.vue';
 import TextInput from '@components/common/TextInput.vue';
 import { useSuperheroesStore } from '@stores/superheroes';
+import { UrlRoutes } from 'src/enums/superheroEnums';
 import HeroImageSelector from './HeroImageSelector.vue';
 
 const superheroesStore = useSuperheroesStore();
 </script>
 
 <template>
-  <div>
+  <div class="relative">
+    <LinkElement text="Go back" :url="UrlRoutes.BASE" classes="absolute top-[-5rem] left-0" />
     <p class="text-4xl font-bold superhero-fonting text-shadow mb-4 text-center">Create your personal Superhero!</p>
     <HeroImageSelector />
     <div class="mt-6">
