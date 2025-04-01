@@ -34,22 +34,18 @@ export class PentathlonSuperhero extends Superhero implements PentathlonSuperher
   }
 
   calculateJokeTelling(othersCharisma: number) {
-    this.currentTrialOutput = 0;
     this.currentTrialOutput = this.attributes.charisma * this.attributes.charisma - othersCharisma;
   }
 
   calculateShotTheVillain(lastClasification: boolean) {
-    this.currentTrialOutput = 0;
     this.currentTrialOutput = this.attributes.agility + this.attributes.strength + (lastClasification ? 5 : 0);
   }
 
   calculateTwoHundredKm() {
-    this.currentTrialOutput = 0;
     this.currentTrialOutput = this.attributes.agility * 4 + this.attributes.endurance * 2 + (this.lastTrialPoints === 5 ? 10 : -1);
   }
 
   calculateHundredKittenRescue() {
-    this.currentTrialOutput = 0;
     this.currentTrialOutput = this.attributes.agility * 2 + (this.numberOfTrialsWon >= 2 ? 5 : 0);
   }
 }
