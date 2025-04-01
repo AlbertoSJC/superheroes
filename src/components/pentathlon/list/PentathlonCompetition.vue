@@ -12,12 +12,12 @@ const loading = ref<boolean>(false);
 </script>
 
 <template>
-  <div class="flex flex-wrap items-center justify-center gap-2.5 w-[530px] max-h-[700px] overflow-auto scroll-container">
+  <div class="flex flex-wrap items-center justify-center gap-2.5 w-[635px] max-h-[700px] overflow-auto scroll-container">
     <template v-if="loading">
       <Loader text="Heroes are COMPETING!" />
     </template>
     <template v-else-if="allSuperheroes && allSuperheroes.length > 0">
-      <PentathlonSuperheroCard v-for="singleHero in allSuperheroes" :chosen-hero="singleHero" :can-be-selected="true" />
+      <PentathlonSuperheroCard v-for="singleHero in allSuperheroes" :chosen-hero="singleHero" />
     </template>
     <template v-else>
       <span class="text-lg font-semibold text-center">Add superheroes to start competing!</span>

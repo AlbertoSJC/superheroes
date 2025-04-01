@@ -8,9 +8,13 @@ interface PropsModel {
   canBeSelected?: boolean;
 }
 
-const { hero } = defineProps<PropsModel>();
+const { hero, canBeSelected } = defineProps<PropsModel>();
 
 const superheroesStore = useSuperheroesStore();
+
+const canHeroBeSelected = () => {
+  if (canBeSelected) superheroesStore.selectPentathlonSuperhero(hero);
+};
 </script>
 
 <template>
@@ -18,7 +22,7 @@ const superheroesStore = useSuperheroesStore();
     :key="hero.id"
     class="relative flex flex-col items-center bg-black border-2 border-[#fff66f] shadow-md rounded-lg p-4 min-w-[160px] max-w-[160px]"
     :class="{ '!bg-[#5058df]': hero.id === superheroesStore.heroToUpload.id || hero.selected, 'cursor-pointer': canBeSelected }"
-    @click="superheroesStore.selectPentathlonSuperhero(hero)"
+    @click="canHeroBeSelected"
   >
     <template v-if="canBeEdited">
       <span class="absolute font-bold text-red-600 top-0 right-2 cursor-pointer delete-hero" @click="superheroesStore.removeHero(hero)">x</span>
