@@ -82,4 +82,12 @@ export class PentathlonList {
     this.reorderCompetitorsOfTrial();
     this.assignPoints();
   }
+
+  executePentathlon() {
+    this.skyscraperClimbing();
+    this.jokeTelling();
+    this.villainShooting();
+    this.twoHundredKm();
+    this.hundredKittenRescue();
+  }
 }

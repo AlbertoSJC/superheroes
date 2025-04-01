@@ -96,11 +96,7 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
 
     const pentathlonRunningList = new PentathlonList(pentathlonList.value.superheroes);
 
-    pentathlonRunningList.skyscraperClimbing();
-    pentathlonRunningList.jokeTelling();
-    pentathlonRunningList.villainShooting();
-    pentathlonRunningList.twoHundredKm();
-    pentathlonRunningList.hundredKittenRescue();
+    pentathlonRunningList.executePentathlon();
 
     const winners = pentathlonRunningList.superheroes.splice(0, 3);
 
