@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Loader from '@components/common/Loader.vue';
-import HeroCard from '@components/list/HeroCard.vue';
 import { useSuperheroesStore } from '@stores/superheroes';
 import { computed, ref } from 'vue';
 import PentathlonSuperheroCard from '../PentathlonSuperheroCard.vue';

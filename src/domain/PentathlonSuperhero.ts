@@ -8,7 +8,7 @@ export interface PentathlonSuperheroInformation extends SuperheroInformation {
   currentTrialOutput?: number;
 }
 
-export class PentathlonSuperhero extends Superhero {
+export class PentathlonSuperhero extends Superhero implements PentathlonSuperheroInformation {
   totalPoints: number;
   lastTrialPoints: number;
   numberOfTrialsWon: number;
@@ -20,5 +20,16 @@ export class PentathlonSuperhero extends Superhero {
     this.lastTrialPoints = data.lastTrialPoints ?? 0;
     this.numberOfTrialsWon = data.numberOfTrialsWon ?? 0;
     this.currentTrialOutput = data.currentTrialOutput ?? 0;
+  }
+
+  resetHeroPoints() {
+    this.currentTrialOutput = 0;
+    this.totalPoints = 0;
+    this.lastTrialPoints = 0;
+    this.numberOfTrialsWon = 0;
+  }
+
+  calculateSkyscraperClimbing() {
+    this.currentTrialOutput = this.attributes.strength * 4 - this.attributes.weight * 2;
   }
 }

@@ -17,6 +17,10 @@ const superheroesStore = useSuperheroesStore();
       <HeroesList :can-be-selected="true" />
       <PentathlonCompetition />
     </div>
-    <ButtonElement text="BEGIN!" :disabled="!superheroesStore.pentathlonList || (superheroesStore.pentathlonList && superheroesStore.pentathlonList.superheroes.length < 2)" />
+    <ButtonElement
+      text="BEGIN!"
+      @click="superheroesStore.pentathlonRunning"
+      :disabled="!superheroesStore.pentathlonList || (superheroesStore.pentathlonList && superheroesStore.pentathlonList.superheroes.length < 2)"
+    />
   </div>
 </template>

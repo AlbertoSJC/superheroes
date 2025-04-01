@@ -10,6 +10,8 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
   const heroToUpload = ref<Superhero>(new Superhero({}));
   const heroToBeforeEdit = ref<Superhero | null>(null);
   const pentathlonList = ref<PentathlonList>(new PentathlonList());
+  const pentathlonWinnersList = ref<PentathlonList>(new PentathlonList());
+  const pentathlonLosersList = ref<PentathlonList>(new PentathlonList());
   const errorMessage = ref<string | null>(null);
 
   const cancelEdit = () => {
@@ -87,16 +89,24 @@ export const useSuperheroesStore = defineStore('superheroes-store', () => {
     }
   };
 
+  const pentathlonRunning = () => {
+    const pentathlonRunningList = new PentathlonList(pentathlonList.value.superheroes);
+    pentathlonRunningList.skyscraperClimbing();
+  };
+
   return {
     list,
     heroToUpload,
     heroToBeforeEdit,
     pentathlonList,
+    pentathlonWinnersList,
+    pentathlonLosersList,
     errorMessage,
     cancelEdit,
     selectPentathlonSuperhero,
     selectHeroToUpdate,
     removeHero,
     createOrUpdateHero,
+    pentathlonRunning,
   };
 });
