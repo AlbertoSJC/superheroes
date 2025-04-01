@@ -1,5 +1,4 @@
 import type { Superhero } from '@domain/Superhero';
-import type { SuperheroesList } from '@domain/SuperheroesList';
 import type { KEY_PARAMETERS, SuperheroInformation } from '@models/typesFile';
 import axios from 'axios';
 import { ENV_VARIABLE } from 'src/env';
